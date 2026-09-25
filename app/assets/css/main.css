@@ -1,0 +1,26 @@
+@import url("https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap");
+
+/* Nova neutral system — design.md §2.1 (shared across all tenants) */
+:root {
+  --bg-canvas: #0a0c10;
+  --bg-surface: #12151b;
+  --bg-elevated: #191d25;
+  --bg-overlay: #1f2430;
+  --border-subtle: #242933;
+  --border-strong: #333a48;
+  --text-primary: #edeff3;
+  --text-secondary: #98a1af;
+  --text-muted: #5c6472;
+  --text-on-accent: #0a0c10;
+  --signal: #5b7fff;
+  --success: #35c48c;
+  --warning: #e8a23d;
+  --danger: #f0556b;
+  --info: #35b0c4;
+}
+
+body {
+  background-color: var(--bg-canvas);
+  font-family: "Plus Jakarta Sans", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
