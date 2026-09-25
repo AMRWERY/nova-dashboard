@@ -65,15 +65,13 @@
         <div class="relative w-8 h-8 rounded-full overflow-hidden bg-[var(--bg-elevated)] border border-[var(--border-subtle)] shrink-0">
           <img
             src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80"
-            alt="Elena Profile"
+            alt="Amr Profile"
             class="w-full h-full object-cover"
           />
           <span class="absolute bottom-0 end-0 w-2 h-2 rounded-full bg-[#3FCB8C] border border-[#0A0C10]" />
         </div>
       </button>
-
     </div>
-
   </div>
 </template>
 

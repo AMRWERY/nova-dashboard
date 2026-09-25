@@ -19,7 +19,9 @@
   --info: #35b0c4;
 }
 
+html,
 body {
+  overflow-x: hidden;
   background-color: var(--bg-canvas);
   font-family: "Plus Jakarta Sans", sans-serif;
   -webkit-font-smoothing: antialiased;

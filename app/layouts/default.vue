@@ -4,21 +4,13 @@
       ? 'min-h-screen bg-[#0A0C10] text-[var(--text-primary)] flex'
       : 'min-h-screen bg-[var(--bg-canvas)] text-[var(--text-primary)]'"
   >
-    <!-- Dashboard shell -->
-    <template v-if="isDashboardRoute">
-      <Sidebar />
-      <div class="flex-1 flex flex-col min-w-0 w-full">
-        <Header />
-        <main class="flex-1 overflow-y-auto">
-          <slot />
-        </main>
-      </div>
-    </template>
-
-    <!-- Auth / other pages -->
-    <template v-else>
-      <slot />
-    </template>
+    <Sidebar v-if="isDashboardRoute" />
+    <div :class="isDashboardRoute ? 'flex-1 flex flex-col min-w-0 w-full' : 'w-full'">
+      <Header v-if="isDashboardRoute" />
+      <main :class="isDashboardRoute ? 'flex-1 overflow-y-auto' : ''">
+        <slot />
+      </main>
+    </div>
   </div>
 </template>
 

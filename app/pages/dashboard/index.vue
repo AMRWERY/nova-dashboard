@@ -4,7 +4,7 @@
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
       <div>
         <h1 class="font-sora font-semibold text-[26px] sm:text-[28px] text-[var(--text-primary)] tracking-tight">
-          Welcome back, Elena
+          Welcome back, Amr
         </h1>
         <div class="flex items-center gap-2 mt-1">
           <p class="font-jakarta text-[14px] text-[var(--text-secondary)]">Here's what's happening today.</p>
