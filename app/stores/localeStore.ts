@@ -30,7 +30,13 @@ export const useLocaleStore = defineStore("locale", () => {
   // setLocale from @nuxtjs/i18n v10 handles both the locale switch
   // AND the navigation to the prefixed route — no manual router.push needed
   const switchLocale = async (code: string) => {
-    await setLocale(code as "en" | "ar");
+    const { showOverlay, hideOverlay } = useLocaleOverlay();
+    showOverlay(code as "en" | "ar");
+    try {
+      await setLocale(code as "en" | "ar");
+    } finally {
+      hideOverlay(400);
+    }
   }
 
   const toggleLocale = () => {

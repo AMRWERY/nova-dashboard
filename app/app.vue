@@ -4,11 +4,15 @@
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
+
+    <LazyVLocaleSwitchOverlay />
   </div>
 </template>
 
 <script lang="ts" setup>
 const { locale, locales } = useI18n()
+const { isSwitching, hideOverlay } = useLocaleOverlay()
+const nuxtApp = useNuxtApp()
 
 // Reactively update <html dir="..." lang="..."> whenever locale changes
 const currentLocaleData = computed(() =>
@@ -20,6 +24,13 @@ useHead({
     lang: computed(() => currentLocaleData.value?.language ?? locale.value),
     dir: computed(() => currentLocaleData.value?.dir ?? 'ltr'),
   },
+})
+
+// Ensure overlay fades out smoothly whenever page loading finishes
+nuxtApp.hook('page:finish', () => {
+  if (isSwitching.value) {
+    hideOverlay(350)
+  }
 })
 </script>
 

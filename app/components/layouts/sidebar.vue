@@ -3,6 +3,7 @@
   <aside
     class="fixed inset-y-0 start-0 z-50 w-60 h-screen bg-[#0A0C10] border-e border-[var(--border-subtle)] flex flex-col select-none transition-transform duration-300 ease-in-out lg:static lg:translate-x-0 lg:shrink-0"
     :class="[
+      isOverlayVisible ? 'sidebar-overlay-hidden' : '',
       isOpen
         ? 'translate-x-0 shadow-2xl'
         : (isArabic ? 'translate-x-full' : '-translate-x-full')
@@ -102,8 +103,14 @@
 const route = useRoute()
 const { locale } = useI18n()
 const { isOpen, close } = useSidebar()
+const { isVisible: isOverlayVisible } = useOverlay()
 
 const isArabic = computed(() => locale.value === 'ar')
+
+// Ensure drawer is closed whenever the overlay is active
+watch(isOverlayVisible, (val) => {
+  if (val) close()
+})
 
 const navItems = [
   { nameEn: 'Dashboard', nameAr: 'لوحة التحكم', to: '/dashboard', icon: 'lucide:layout-grid' },
@@ -145,6 +152,13 @@ onMounted(() => {
 </script>
 
 <style scoped>
+/* Hide sidebar completely on mobile when locale transition overlay is active */
+@media (max-width: 1023px) {
+  .sidebar-overlay-hidden {
+    display: none !important;
+  }
+}
+
 /* Mobile overlay backdrop animation */
 .overlay-enter-active,
 .overlay-leave-active {

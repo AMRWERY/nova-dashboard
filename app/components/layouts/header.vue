@@ -64,7 +64,7 @@
       >
         <div class="relative w-8 h-8 rounded-full overflow-hidden bg-[var(--bg-elevated)] border border-[var(--border-subtle)] shrink-0">
           <img
-            src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80"
+            src="/img/fake-user.png"
             alt="Amr Profile"
             class="w-full h-full object-cover"
           />
@@ -76,20 +76,29 @@
 </template>
 
 <script lang="ts" setup>
-const { isOpen, toggle } = useSidebar()
+const { isOpen, toggle, close } = useSidebar()
+const { showOverlay, hideOverlay } = useLocaleOverlay()
 
 const { locale, setLocale } = useI18n()
 const switchLocalePath = useSwitchLocalePath()
 
 const currentLocaleLabel = computed(() => (locale.value === 'ar' ? 'العربية' : 'EN'))
 
-function toggleLanguage() {
+async function toggleLanguage() {
+  close()
   const nextLocale = locale.value === 'en' ? 'ar' : 'en'
-  const nextPath = switchLocalePath(nextLocale)
-  if (nextPath) {
-    navigateTo(nextPath)
-  } else {
-    setLocale(nextLocale)
+  showOverlay(nextLocale)
+
+  try {
+    const nextPath = switchLocalePath(nextLocale)
+    if (nextPath) {
+      await navigateTo(nextPath)
+    } else {
+      await setLocale(nextLocale)
+    }
+  } finally {
+    // Settle time for layout reorientation and smooth fade out
+    hideOverlay(400)
   }
 }
 </script>
